@@ -5,7 +5,11 @@ public abstract class Person {
     private String lastName;
     private String socialSecurityNumber;
 
-    public Person(String firstName, String lastName, String socialSecurityNumbers){};
+    public Person(String firstName, String lastName, String socialSecurityNumber){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.socialSecurityNumber = socialSecurityNumber;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -37,10 +41,6 @@ public abstract class Person {
 
     @Override
     public String toString() {
-        return "Person{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", socialSecurityNumber='" + socialSecurityNumber + '\'' +
-                '}';
+        return "Name: " + getFullName() + ".\nSocial security number: " + getSocialSecurityNumber();
     }
 }
