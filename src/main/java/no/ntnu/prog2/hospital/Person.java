@@ -40,6 +40,14 @@ public abstract class Person {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if(this == obj) return true;
+        if((obj == null) || (this.getClass() != obj.getClass())) return false;
+        String socialSecNum = ((Person)obj).getSocialSecurityNumber();
+        return this.getSocialSecurityNumber().equals(socialSecNum);
+    }
+
+    @Override
     public String toString() {
         return "Name: " + getFullName() + ".\nSocial security number: " + getSocialSecurityNumber();
     }
