@@ -41,10 +41,16 @@ public abstract class Person {
 
     @Override
     public boolean equals(Object obj) {
+        String socialSecNum;
         if(this == obj) return true;
-        if((obj == null) || (this.getClass() != obj.getClass())) return false;
-        String socialSecNum = ((Person)obj).getSocialSecurityNumber();
-        return this.getSocialSecurityNumber().equals(socialSecNum);
+        else if(this.getClass() == Patient.class) {
+            if((obj == null) || (this.getClass() != obj.getClass())) return false;
+                socialSecNum = ((Patient)obj).getSocialSecurityNumber();
+                return this.getSocialSecurityNumber().equals(socialSecNum);
+        }else {
+            socialSecNum = ((Employee)obj).getSocialSecurityNumber();
+            return this.getSocialSecurityNumber().equals(socialSecNum);
+        }
     }
 
     @Override

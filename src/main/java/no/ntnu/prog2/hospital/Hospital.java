@@ -8,8 +8,12 @@ public class Hospital {
     private ArrayList<Department> departments;
 
     public Hospital(String hospitalName) {
-        this.hospitalName = hospitalName;
-        this.departments = new ArrayList<>();
+        if(!(hospitalName).equals("")) {
+            this.hospitalName = hospitalName;
+            this.departments = new ArrayList<>();
+        } else {
+            throw new IllegalArgumentException("Hospital name can not be empty.");
+        }
     }
 
     public String getHospitalName() {
@@ -39,7 +43,9 @@ public class Hospital {
 
 
     public void addDepartment(Department toAdd) {
-        if(iterateDepartments(toAdd)) departments.add(toAdd);
+        if(!(iterateDepartments(toAdd))) departments.add(toAdd);
+        else throw new IllegalArgumentException("Department '" + toAdd.getDepartmentName() +
+                "', already exists in system.");
     }
 
 

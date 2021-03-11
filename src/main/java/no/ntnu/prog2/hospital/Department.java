@@ -11,9 +11,14 @@ public class Department {
     private ArrayList<Patient> patients;
 
     public Department(String departmentName) {
-        this.departmentName = departmentName;
-        this.employees = new ArrayList<>();
-        this.patients = new ArrayList<>();
+        if(!(departmentName).equals("")) {
+            this.departmentName = departmentName;
+            this.employees = new ArrayList<>();
+            this.patients = new ArrayList<>();
+        } else {
+            throw new IllegalArgumentException("Department name can not be empty.");
+        }
+
     }
 
     public void setDepartmentName(String departmentName) {
@@ -33,11 +38,25 @@ public class Department {
     }
 
     public void addEmployee(Employee toAdd) {
-        if(iteratePerson(toAdd)) employees.add(toAdd);
+        if(!(iteratePerson(toAdd))) employees.add(toAdd);
+        else throw new IllegalArgumentException("Employee with social security number '" +
+                toAdd.getSocialSecurityNumber() + "', already exists in system.");
     }
 
     public void addPatient(Patient toAdd) {
-        if(iteratePerson(toAdd)) patients.add(toAdd);
+        if(!(iteratePerson(toAdd))) patients.add(toAdd);
+        else throw new IllegalArgumentException("Patient with social security number '" +
+                toAdd.getSocialSecurityNumber() + "', already exists in system.");
+    }
+
+    public void remove(Person person) throws RemoveException {
+        boolean exists = iteratePerson(person);
+        if(exists) {
+            if(person instanceof Employee) employees.remove(person);
+            else if(person instanceof Patient) patients.remove(person);
+        }
+        else throw new RemoveException("Unable to remove " + person.getFullName() +
+                " from department '" + this.getDepartmentName() + "'.");
     }
 
 
@@ -45,7 +64,7 @@ public class Department {
         if(person instanceof Employee) {
             Iterator<Employee> employeeIterator = employees.iterator();
             Employee toCheck;
-            if(employeeIterator.hasNext()) {
+            while(employeeIterator.hasNext()) {
                 toCheck = employeeIterator.next();
                 if(toCheck.equals(person)) return true;
             }
@@ -54,7 +73,7 @@ public class Department {
         else if(person instanceof Patient) {
             Iterator<Patient> patientIterator = patients.iterator();
             Patient toCheck;
-            if(patientIterator.hasNext()) {
+            while(patientIterator.hasNext()) {
                 toCheck = patientIterator.next();
                 if(toCheck.equals(person)) return true;
             }
