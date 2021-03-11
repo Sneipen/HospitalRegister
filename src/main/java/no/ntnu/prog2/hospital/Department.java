@@ -10,6 +10,7 @@ public class Department {
     private ArrayList<Employee> employees;
     private ArrayList<Patient> patients;
 
+
     public Department(String departmentName) {
         if(!(departmentName).equals("")) {
             this.departmentName = departmentName;
@@ -20,6 +21,11 @@ public class Department {
         }
 
     }
+
+    /***
+     *
+     * @param departmentName = Name of hospitals department.
+     */
 
     public void setDepartmentName(String departmentName) {
         this.departmentName = departmentName;
@@ -37,6 +43,12 @@ public class Department {
         return patients;
     }
 
+
+    /***
+     * @methods addEmployee & addPatient
+     * @param toAdd = attempt to add this employee
+     * @throws  IllegalArgumentException with info containing reasoning
+     */
     public void addEmployee(Employee toAdd) {
         if(!(iteratePerson(toAdd))) employees.add(toAdd);
         else throw new IllegalArgumentException("Employee with social security number '" +
@@ -49,6 +61,15 @@ public class Department {
                 toAdd.getSocialSecurityNumber() + "', already exists in system.");
     }
 
+    /***
+     *
+     * @param person
+     * @throws RemoveException with information.
+     *
+     * The method 'remove' uses method 'iteratePerson' to decide if @param person exists
+     * Then figures out subclass and tries to remove accordingly.
+     */
+
     public void remove(Person person) throws RemoveException {
         boolean exists = iteratePerson(person);
         if(exists) {
@@ -59,6 +80,16 @@ public class Department {
                 " from department '" + this.getDepartmentName() + "'.");
     }
 
+
+    /***
+     *
+     * @param person
+     * @return boolean
+     *
+     * Figures out instance and iterates arraylist of that type.
+     * uses overwritten equals-method to decide for equality.
+     * returns true/false based on @param person's existence in arraylist.
+     */
 
     private boolean iteratePerson(Person person) {
         if(person instanceof Employee) {
@@ -82,7 +113,13 @@ public class Department {
     }
 
 
-
+    /***
+     *
+     * @param obj
+     * @return boolean
+     * Method checks for self defined equality between departments
+     * which is if departmentName is the same or if all elements in list are the same.
+     */
     @Override
     public boolean equals(Object obj) {
         if(this == obj) return true;

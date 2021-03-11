@@ -1,9 +1,17 @@
 package no.ntnu.prog2.hospital;
 
 public abstract class Person {
+
     private String firstName;
     private String lastName;
     private String socialSecurityNumber;
+
+    /***
+     *
+     * @param firstName = Persons first name
+     * @param lastName  = Persons last name
+     * @param socialSecurityNumber  = unique SSN for all Persons in all Departments
+     */
 
     public Person(String firstName, String lastName, String socialSecurityNumber){
         this.firstName = firstName;
@@ -38,6 +46,19 @@ public abstract class Person {
     public String getFullName() {
         return this.firstName + " " + this.lastName;
     }
+
+    /***
+     *
+     * @param obj
+     * @return boolean
+     *
+     * self defined equals method to compare different person objects
+     * The method is designed in hand with methods personIterator and remove/add methods.
+     *
+     * The method allows employees and patients to exist in different departments
+     * Employees is also able to be registered as a patient, as they could get sick/hurt
+     * and therefore enter a department as a patient.
+     */
 
     @Override
     public boolean equals(Object obj) {

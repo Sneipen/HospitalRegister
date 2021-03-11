@@ -26,7 +26,6 @@ public class DepartmentTest {
                 System.out.println(e.getMessage());
             }
             Assertions.assertEquals(department.getEmployees().get(0), surgeon);
-            System.out.println(department.getEmployees());
         }
 
         @Test
@@ -37,7 +36,6 @@ public class DepartmentTest {
                 System.out.println(e.getMessage());
             }
             Assertions.assertEquals(department.getPatients().get(0), patient);
-            System.out.println(department.getPatients());
         }
 
     }
@@ -58,7 +56,6 @@ public class DepartmentTest {
                 System.out.println(e.getMessage());
             }
             Assertions.assertTrue(department.getPatients().size() == 1);
-            System.out.println(department.getPatients());
         }
 
         @Test
@@ -88,7 +85,6 @@ public class DepartmentTest {
             }catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
-            System.out.println(department.getPatients());
         }
 
         @Test
@@ -99,8 +95,6 @@ public class DepartmentTest {
             }catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
-            System.out.println(department.getEmployees());
-
         }
     }
 
@@ -109,14 +103,12 @@ public class DepartmentTest {
         @Test
         void canRemoveExistingEmployee() throws RemoveException {
             department.addEmployee(nurse);
-            System.out.println(department.getEmployees());
             try {
                 department.remove(nurse);
             }catch (RemoveException e) {
                 System.out.println(e.getMessage());
             }
             Assertions.assertTrue(department.getEmployees().size() == 0);
-            System.out.println(department.getEmployees());
         }
 
         @Test
